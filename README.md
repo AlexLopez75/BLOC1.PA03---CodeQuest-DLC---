@@ -1,76 +1,116 @@
-# Chapter 7: Decode Ancient Scrolls
+# 📜 ACTIVITAT: CODEQUEST - JOC DE ROL PER CONSOLA
+## 🎯 Descripció General
 
-Normal: All scrolls successfully decoded
+Has de crear un joc de rol RPG per consola en C# anomenat CodeQuest, on el jugador controla un mag que pot entrenar, pujar de nivell, aconseguir recursos, comprar objectes i desxifrar pergamins antics.
+El joc ha de tenir un menú principal amb 7 opcions funcionals més l'opció de sortir.
 
-| Instruction | Iteration | scroll | vowelsCounter | arrayDecoded[0] | arrayDecoded[1] | arrayDecoded[2] | Output |
-|-------------|-----------|--------|---------------|-----------------|-----------------|-----------------|--------|
-| 1 | - | - | 0 | false | false | false | - |
-| 2 | - | - | 0 | false | false | false | WRITE = "You have found the ancient scrolls, but they are encrypted." |
-| 3 | - | - | 0 | false | false | false | WRITE = "1. When the moon is full, the arcana will be the means of which all will be revealed." |
-| 4 | - | - | 0 | false | false | false | WRITE = "2. The magic in the inside is the strenght to conquer the fear of of death." |
-| 5 | - | - | 0 | false | false | false | WRITE = "3. Spells: Diarahan ✨ 4, Panta rei 🌪️ 6, Myriad truths ☄️ 9, Matarukaja 💪 3." |
-| 6 | - | - | 0 | false | false | false | WRITE = "Select a method of decoding:" |
-| 7 | - | - | 0 | false | false | false | WRITE = "1. Decipher spell (remove spaces).\n2. Count magical runes (vowels).\n3. Extract secret code (numbers)." |
-| 8 | - | 1 | 0 | false | false | false | READ = 1 |
-| 9 | - | 1 | 0 | false | false | false | WRITE = "Decoded spell: Whenthemoonisfull,thearcana..." |
-| 10 | - | 1 | 0 | true | false | false | arrayDecoded[0] = true |
-| 11 | - | - | 0 | true | false | false | WRITE = "Select a method of decoding:" |
-| 12 | - | 2 | 0 | true | false | false | READ = 2 |
-| 13 | 1 | 2 | 0 | true | false | false | vowelsCounter = 0 |
-| 13 | 2 | 2 | 1 | true | false | false | vowelsCounter++ (letter = 'e') |
-| 13 | 3 | 2 | 2 | true | false | false | vowelsCounter++ (letter = 'a') |
-| 13 | ... | 2 | ... | true | false | false | ... |
-| 13 | n | 2 | 27 | true | false | false | vowelsCounter = 27 |
-| 14 | - | 2 | 27 | true | false | false | WRITE = "27 magical runes (vowels) found." |
-| 15 | - | 2 | 27 | true | true | false | arrayDecoded[1] = true |
-| 16 | - | - | 27 | true | true | false | WRITE = "Select a method of decoding:" |
-| 17 | - | 3 | 27 | true | true | false | READ = 3 |
-| 18 | - | 3 | 27 | true | true | false | WRITE = "The secret code is: " |
-| 19 | 1 | 3 | 27 | true | true | false | letter = 'S' (no match) |
-| 19 | 2 | 3 | 27 | true | true | false | letter = 'p' (no match) |
-| 19 | ... | 3 | 27 | true | true | false | ... |
-| 19 | n | 3 | 27 | true | true | false | letter = '4', WRITE = "4" |
-| 19 | n+1 | 3 | 27 | true | true | false | letter = '6', WRITE = "6" |
-| 19 | n+2 | 3 | 27 | true | true | false | letter = '9', WRITE = "9" |
-| 19 | n+3 | 3 | 27 | true | true | false | letter = '3', WRITE = "3" |
-| 20 | - | 3 | 27 | true | true | true | arrayDecoded[2] = true |
-| 21 | - | - | 27 | true | true | true | arrayDecoded[0] == true && arrayDecoded[1] == true && arrayDecoded[2] == true ? = true |
-| 22 | - | - | 27 | true | true | true | WRITE = "Congratulations, you have succesfully decoded all the ancient scrolls..." |
+## 📋 Requisits Funcionals
+### Menú Principal
 
-Limit: Decode only one scroll
+S'ha de mostrar repetidament fins que l'usuari triï sortir (opció 0). El menú inclou:
 
-| Instruction | Iteration | scroll | vowelsCounter | arrayDecoded[0] | arrayDecoded[1] | arrayDecoded[2] | Output |
-|-------------|-----------|--------|---------------|-----------------|-----------------|-----------------|--------|
-| 1 | - | - | 0 | false | false | false | - |
-| 2 | - | - | 0 | false | false | false | WRITE = "You have found the ancient scrolls, but they are encrypted." |
-| 3 | - | - | 0 | false | false | false | WRITE = "1. When the moon is full..." |
-| 4 | - | - | 0 | false | false | false | WRITE = "2. The magic in the inside..." |
-| 5 | - | - | 0 | false | false | false | WRITE = "3. Spells: Diarahan..." |
-| 6 | - | - | 0 | false | false | false | WRITE = "Select a method of decoding:" |
-| 7 | - | - | 0 | false | false | false | WRITE = "1. Decipher spell (remove spaces).\n2. Count magical runes (vowels).\n3. Extract secret code (numbers)." |
-| 8 | - | 1 | 0 | false | false | false | READ = 1 |
-| 9 | - | 1 | 0 | false | false | false | WRITE = "Decoded spell: Whenthemoonisfull,thearcana..." |
-| 10 | - | 1 | 0 | true | false | false | arrayDecoded[0] = true |
-| 11 | - | - | 0 | true | false | false | WRITE = "Select a method of decoding:" |
-| 12 | - | 0 | 0 | true | false | false | READ = 0 (exit by user - loop exits if scrollInput remains true) |
-| 13 | - | - | 0 | true | false | false | arrayDecoded[0] == true && arrayDecoded[1] == true && arrayDecoded[2] == true ? = false |
-| 14 | - | - | 0 | true | false | false | No congratulations message displayed |
+===== MAIN MENU - CODEQUEST =====
+===== Welcome, [NOM] the [TÍTOL] with level [NIVELL] =====
+Train your wizard - Entrenar el mag
+Increase LVL - Combatre i pujar de nivell
+Loot the mine - Minar per aconseguir bits (moneda del joc)
+Show inventory - Mostrar inventari
+Buy items - Comprar objectes
+Show attacks by LVL - Veure atacs disponibles segons el nivell
+Decode ancient Scroll - Desxifrar pergamins màgics
+Exit game - Sortir
 
-Error: Invalid input
+## 🔧 Funcionalitats per Chapter
 
-| Instruction | Iteration | scroll | vowelsCounter | arrayDecoded[0] | arrayDecoded[1] | arrayDecoded[2] | scrollInput | Output |
-|-------------|-----------|--------|---------------|-----------------|-----------------|-----------------|-------------|--------|
-| 1 | - | - | 0 | false | false | false | true | - |
-| 2 | - | - | 0 | false | false | false | true | WRITE = "You have found the ancient scrolls, but they are encrypted." |
-| 3 | - | - | 0 | false | false | false | true | WRITE = "1. When the moon is full..." |
-| 4 | - | - | 0 | false | false | false | true | WRITE = "2. The magic in the inside..." |
-| 5 | - | - | 0 | false | false | false | true | WRITE = "3. Spells: Diarahan..." |
-| 6 | - | - | 0 | false | false | false | true | WRITE = "Select a method of decoding:" |
-| 7 | - | - | 0 | false | false | false | true | WRITE = "1. Decipher spell (remove spaces).\n2. Count magical runes (vowels).\n3. Extract secret code (numbers)." |
-| 8 | - | - | 0 | false | false | false | true | READ = "abc" (invalid input) |
-| 9 | - | - | 0 | false | false | false | true | FormatException caught |
-| 10 | - | - | 0 | false | false | false | false | scrollInput = false |
-| 11 | - | - | 0 | false | false | false | false | WRITE = "Input a number between 1 and 3." |
-| 12 | - | - | 0 | false | false | false | false | scrollInput != true ? = true (loop exits) |
-| 13 | - | - | 0 | false | false | false | false | arrayDecoded[0] == true && arrayDecoded[1] == true && arrayDecoded[2] == true ? = false |
-| 14 | - | - | 0 | false | false | false | false | No congratulations message displayed |
+### Chapter 1: Train your wizard
+
+Sol·licita el nom del mag i el capitalitza correctament (primera lletra majúscula, resta minúscules)
+- Simula 5 dies d'entrenament
+- Cada dia genera aleatòriament:
+    - Hores d'entrenament (entre 1 i 24)
+    - Punts de poder guanyats (entre 1 i 10)
+- En finalitzar, assigna un títol/rang segons el poder total acumulat:
+
+| Punts de Poder | Títol | Missatge |
+|----------------|-------|----------|
+|< 20 | Raoden el Elantrí | Repeteixes a 2a convocatòria. |
+| 20-29 | Zyn el Buguejat | Encara confons la vareta amb una cullera. |
+| 30-34 | Arka Nullpointer | Ets un Invocador de Brises Màgiques. |
+| 35-39 | Elarion de les Brases | Uau! Pots invocar dracs sense cremar el laboratori! |
+| ≥ 40 | ITB-Wizard el Gris | Has assolit el rang de Mestre dels Arcans! |
+
+### Chapter 2: Increase LVL
+
+- Apareix un monstre aleatori amb els seus punts de vida (HP)
+- El jugador tira un dau (aleatori entre 1 i 6).
+- Cada tirada resta HP al monstre i mostra un ASCII art del dau
+- Quan el monstre arriba a 0 HP, el jugador puja un nivell (màxim nivell 5)
+
+| Monstre | HP |
+|---------|----|
+| Wandering Skeleton 💀 | 3 |
+| Forest Goblin 👹 | 5 |
+| Green Slime 🟢 | 10 |
+| Ember Wolf 🐺 | 11 |
+| Giant Spider 🕷️ | 18 |
+| Iron Golem 🤖 | 15 |
+| Lost Necromancer 🧝‍♂️ | 20 |
+| Ancient Dragon 🐉 | 50 |
+
+S'ha d'utilitzar art ASCII per deibuixar els daus:
+```
+   ________
+  /       /|   
+ /_______/ |
+ |       | |
+ |   o   | /
+ |       |/ 
+ '-------'
+```
+
+### Chapter 3: Loot the mine
+
+- Mostra una matriu 5x5 buida al principi
+- El jugador té 5 intents per minar
+- Ha d'introduir coordenades X i Y
+- La matriu té posicions amb monedes (generades aleatòriament a l'inici)
+- Si encerta, guanya entre 5 i 50 bits
+- Mostra la matriu actualitzada després de cada intent amb símbols:
+    - ➖ = No excavat
+    - 🪙 = Moneda trobada
+    - ❌ = Excavat sense èxit
+
+### Chapter 4: Show inventory
+
+- Mostra tots els objectes comprats
+- Si està buit, indica que no hi ha objectes
+
+### Chapter 5: Buy items
+
+- Mostra els objectes disponibles amb els seus preus
+- El jugador selecciona un número
+- Si té prou bits, compra l'objecte i s'afegeix a l'inventari
+- Els bits es descompten
+
+| Objecte | Preu (bits) |
+|---------|-------------|
+| Iron Dagger 🗡️ | 30 |
+| Healing Potion ⚗️ | 10 |
+| Ancient Key 🗝️ | 50 |
+| Crossbow 🏹 | 40 |
+| Metal Shield 🛡️ | 20 |
+
+### Chapter 6: Show attacks by LVL
+
+- Mostra els atacs disponibles segons el nivell actual del mag
+- Cada nivell té diferents atacs
+
+### Chapter 7: Decode ancient Scroll
+
+Presenta 3 sub-opcions per treballar amb el desxifratge del pergamí:
+
+- Eliminar espais del primer pergamí
+- Comptar vocals (incloses accentuades) del segon pergamí
+- Extreure números del tercer pergamí
+
+Quan es completen les 3 tasques, mostra un missatge d'èxit.
